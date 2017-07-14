@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="public" template="/WEB-INF/views/layout/public.jsp">
+		<put-attribute name="title" value="Board Spring Tiles - Public"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="wrapper" value=""/>
+	</definition>
+	<definition name="public:*" extends="public">
+		<put-attribute name="wrapper" value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+	<definition name="board" template="/WEB-INF/views/layout/board.jsp">
+		<put-attribute name="title" value="Board Spring Tiles - Board"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="wrapper" value=""/>
+	</definition>
+	<definition name="board:*" extends="board">
+		<put-attribute name="wrapper" value="/WEB-INF/views/board/{1}.jsp"/>
+	</definition>
+</tiles-definitions>

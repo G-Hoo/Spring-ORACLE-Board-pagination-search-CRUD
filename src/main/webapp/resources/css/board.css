@@ -1,0 +1,90 @@
+
+/* home jsp start */
+
+.home-wrapper{
+	width:100%;
+	text-align:center;
+}
+
+.home-goboardbtn{
+	margin-top:100px;
+	border: none;
+    background-color: skyblue;
+    width: 100px;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+/* home jsp end */
+
+/* boardlist jsp start */
+
+.boardlist-wrapper{
+	width:100%;
+}
+
+.boardlist-subwrapper{
+	margin: 0 auto; 
+	text-align:center; 
+	width: 800px;
+}
+
+.boardlist-table{
+	width: 600px;
+    margin: 100px auto 0;
+}
+
+.boardlist-table-schema{
+	margin-bottom:15px;	
+}
+
+.pagination {
+	margin-top:20px;	
+}
+
+.pagination li{
+	display:inline-block;
+}
+.pagination li a {
+	text-decoration:none;
+	cursor:pointer;
+	display:inline-block;
+	width:20px;
+	background-color:skyblue;
+	color:white;
+	padding-bottom: 1px;
+    border-radius: 5px;
+}
+
+.boardlist-btn-wrapper{
+	text-align:right;
+	margin-top:10px;
+}
+
+#write{
+	text-decoration:none;
+}
+
+.board-writebtn{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+.board-homebtn{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+/* boardlist jsp end */

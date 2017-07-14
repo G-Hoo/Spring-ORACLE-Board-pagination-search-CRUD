@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.web.mapper.BoardMapper">
+   <!-- INSERT -->
+   <insert id="write">
+   INSERT INTO Board(seq, id, title, content, regdate, readCount) VALUES (seq.nextval, #{id}, #{title}, #{content}, #{regdate}, '0')
+   </insert>
+   
+   <!-- SELECT -->
+   <select id="getArticleList" resultType="com.board.web.domain.Board" parameterType="hashMap">
+   SELECT t2.* FROM (SELECT ROWNUM art_seq, t.* FROM (SELECT * FROM Board ORDER BY seq DESC) t) t2 WHERE t2.art_seq BETWEEN #{startRow} AND #{endRow}
+   </select>
+   
+   <!-- UPDATE -->
+   
+   <!-- DELETE -->
+   
+   <!-- COUNT -->
+   <select id="count" resultType="int" parameterType="hashMap">
+   SELECT COUNT(*) FROM ${group}
+   </select>
+   
+   <!-- EXIST -->
+   <select id="exist" resultType="int" parameterType="hashMap">
+   SELECT COUNT(*) FROM ${group} WHERE id = #{id}
+   </select>
+</mapper>
