@@ -2,6 +2,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="boardlist-wrapper">
 	<div class="boardlist-subwrapper">
+	<!-- 검색 부분 시작-->
+		<form action="${context}/search">
+			<div class="boardlist-search-wrapper">
+			<select class="boardlist-search-selectbox" name="selectVal">
+				<option value="all">전체</option>
+				<option value="writer">작성자</option>
+				<option value="title">제목</option>
+			</select>
+			<div class="boardlist-searchbtn-wrapper">
+				<input id="searchtext" type="text" name="searchtext" placeholder="게시물 검색">
+				<button class="boardlist-searchbtn" type="submit">검색</button>
+				<input type="hidden" name="action" value="search"/>
+			</div>
+			</div>
+		</form>
+	<!-- 검색 부분 끝-->
+	
+	<!-- 게시판 리스트 부분 시작 -->
 		<table class="boardlist-table" id="board_list" class="table table-hover"> 
 			<tr>
 				<td colspan="5">총 게시글 수 : <b>${theNumberOfRows}</b>건</td>
@@ -23,7 +41,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-		
+	<!-- 게시판 리스트 부분 끝 -->	
+	
+	<!-- 페이지네이션 부분 시작-->
 		<form id="pagination">
 			<ul class="pagination" id="pagination" class="pagination">
 			    <c:if test="${prevBlock gt 0}">
@@ -54,7 +74,9 @@
 				</c:if>
 			</ul>
 		</form>
-		
+	<!-- 페이지네이션 부분 끝 -->
+	
+	<!-- 글쓰기,홈으로 버튼 부분 시작 -->
 		<div class="boardlist-btn-wrapper">
 			<a id="write" href="${context}/write">
 				<input class="board-writebtn" type="button" value="글쓰기"/>
@@ -64,6 +86,7 @@
 				<input class="board-homebtn" type="button" value="홈으로"/>
 			</a>
 		</div>
+	<!-- 글쓰기,홈으로 버튼 부분 끝 -->	
 	</div>
 </div>
 <script>
