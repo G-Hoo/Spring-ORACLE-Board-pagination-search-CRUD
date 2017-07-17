@@ -116,3 +116,43 @@
 }
 
 /* boardlist jsp end */
+
+/* boardwrite jsp start */
+
+.boardwrite-wrapper{
+	width:100%;
+}
+.boardwrite-subwrapper{
+	width:1200px;
+	margin:200px auto 0;
+	text-align:center;
+}
+textarea{
+	width:345px;
+	margin-top:20px;
+}
+.boardwrite-btnwrapper{
+	width: 345px;
+    margin: 20px auto;
+    text-align: right;
+}
+#boardwrite-write{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+#boardwrite-cancel{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+/* boardwrite jsp end */

@@ -4,7 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Board {
-	String seq, id, title, content, regdate, readCount;
+	String seq, id, title, content, regdate;
+	int hit_cnt;
+
+	public int getHit_cnt() {
+		return hit_cnt;
+	}
+
+	public void setHit_cnt(int hit_cnt) {
+		this.hit_cnt = hit_cnt;
+	}
 
 	public String getSeq() {
 		return seq;
@@ -44,13 +53,5 @@ public class Board {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
-	}
-
-	public String getReadCount() {
-		return readCount;
-	}
-
-	public void setReadCount(String readCount) {
-		this.readCount = readCount;
 	}
 }

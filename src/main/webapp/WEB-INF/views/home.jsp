@@ -15,8 +15,7 @@
 <body>
 	<div class="home-wrapper">
 		<form action="${context}/list/1" id="board">
-			<input class="home-goboardbtn" type="submit" value="게시판 가기"/>
-			<input type="hidden" name="pageNo" value="1" />              
+			<input class="home-goboardbtn" type="submit" value="게시판 가기"/>          
 	    </form>
     </div>
 </body>

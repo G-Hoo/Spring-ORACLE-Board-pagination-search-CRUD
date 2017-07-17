@@ -8,15 +8,21 @@ import com.board.web.domain.Board;
 @Repository
 public interface BoardMapper {
 	
-	/*CREATE*/
+	/*CREATE start*/
 	public int write(Map<?,?> map) throws Exception;
+	/*CREATE end*/
 	
-	/*READ*/
+	/*READ start*/
 	public List<Board> getArticleList(Map<?,?> map) throws Exception;
 	public int count(Map<?,?> map) throws Exception;
 	public int exist(Map<?,?> map) throws Exception;
+	/*READ end*/
 	
-	/*UPDATE*/
+	/*UPDATE start*/
 	
-	/*DELETE*/
+	/*UPDATE end*/
+	
+	/*DELETE start*/
+	
+	/*DELETE end*/
 }

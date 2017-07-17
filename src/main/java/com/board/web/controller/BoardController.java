@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.board.web.domain.Board;
 import com.board.web.service.BoardService;
+import com.board.web.util.Util;
 
 @Controller
 @SessionAttributes("board")
@@ -66,4 +69,16 @@ public class BoardController {
 		model.addAttribute("null", null);
 		return "board:list";
 	}
+	
+	@RequestMapping(value = "/write")
+	public String write(Model model, HttpSession session) throws Exception{
+		logger.info("BoardController - write() {}", "POST");
+		Map<String, Object> map = new HashMap<>();
+		map.put("regdate", Util.nowDate());
+		String movePosition = "board:write";
+		/*if(postService.write(map)==1){
+			movePosition = "board:list";
+		}*/
+		return movePosition;
+	};
 }

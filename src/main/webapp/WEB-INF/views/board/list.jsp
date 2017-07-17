@@ -37,7 +37,7 @@
 					<td><span>${article.id}</span></td>
 					<td><span><a id="link" href="#">${article.title}</a></span></td>
 					<td><span>${article.regdate}</span></td>
-					<td><span>${article.readCount}</span></td>
+					<td><span>${article.hit_cnt}</span></td>
 				</tr>
 			</c:forEach>
 		</table>
