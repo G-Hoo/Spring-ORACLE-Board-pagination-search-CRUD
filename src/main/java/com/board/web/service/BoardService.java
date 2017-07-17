@@ -29,4 +29,11 @@ public class BoardService {
 		IGetService service = (map) -> mapper.count(map);
 		return (int) service.execute((Map<String, Object>) paramMap);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public int insertArticle(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - insertArticle (){}", "ENTERED");
+		IPostService service = (map) -> mapper.insertArticle(map);
+		return (int) service.execute((Map<String, Object>) paramMap);
+	}
 }

@@ -3,9 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.web.mapper.BoardMapper">
+
    <!-- INSERT -->
-   <insert id="write">
-   INSERT INTO Board(seq, id, title, content, regdate, readCount) VALUES (seq.nextval, #{id}, #{title}, #{content}, #{regdate}, '0')
+   <insert id="insertArticle" parameterType="hashMap">
+   INSERT INTO Board(seq, id, title, content, regdate, hit_cnt) VALUES (seq.nextval, #{id}, #{title}, #{content}, #{regdate}, 0)
    </insert>
    
    <!-- SELECT -->

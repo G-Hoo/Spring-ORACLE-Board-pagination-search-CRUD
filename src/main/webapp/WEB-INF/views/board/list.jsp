@@ -77,8 +77,9 @@
 	<!-- 페이지네이션 부분 끝 -->
 	
 	<!-- 글쓰기,홈으로 버튼 부분 시작 -->
+
 		<div class="boardlist-btn-wrapper">
-			<a id="write" href="${context}/write">
+			<a id="write" href="${context}/goWritePage">
 				<input class="board-writebtn" type="button" value="글쓰기"/>
 			</a>
 
@@ -86,7 +87,8 @@
 				<input class="board-homebtn" type="button" value="홈으로"/>
 			</a>
 		</div>
-	<!-- 글쓰기,홈으로 버튼 부분 끝 -->	
+
+	<!-- 글쓰기,홈으로 버튼 부분 끝 -->
 	</div>
 </div>
 <script>

@@ -9,7 +9,7 @@ import com.board.web.domain.Board;
 public interface BoardMapper {
 	
 	/*CREATE start*/
-	public int write(Map<?,?> map) throws Exception;
+	public int insertArticle(Map<?,?> map) throws Exception;
 	/*CREATE end*/
 	
 	/*READ start*/
