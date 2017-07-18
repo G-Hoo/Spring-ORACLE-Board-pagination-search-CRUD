@@ -15,6 +15,15 @@ public class BoardService {
 	
 	@Autowired
 	BoardMapper mapper;
+	@Autowired
+	Board board;
+	
+	@SuppressWarnings("unchecked")
+	public int insertArticle(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - insertArticle (){}", "ENTERED");
+		IPostService service = (map) -> mapper.insertArticle(map);
+		return (int) service.execute((Map<String, Object>) paramMap);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Board> getArticleList(Map<?,?> paramMap) throws Exception {
@@ -24,6 +33,13 @@ public class BoardService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public Board selectArticle(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - selectArticle (){}", "ENTERED");
+		IGetService service = (map) -> mapper.selectArticle(map);
+		return (Board) service.execute((Map<String, Object>) paramMap);
+	} 
+	
+	@SuppressWarnings("unchecked")
 	public int count(Map<?,?> paramMap) throws Exception {
 		logger.info("BoardService - count (){}", "ENTERED");
 		IGetService service = (map) -> mapper.count(map);
@@ -31,9 +47,9 @@ public class BoardService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public int insertArticle(Map<?,?> paramMap) throws Exception {
-		logger.info("BoardService - insertArticle (){}", "ENTERED");
-		IPostService service = (map) -> mapper.insertArticle(map);
+	public int updateHitCount(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - updateHitCount (){}", "ENTERED");
+		IPutService service = (map) -> mapper.updateHitCount(map);
 		return (int) service.execute((Map<String, Object>) paramMap);
 	}
 }

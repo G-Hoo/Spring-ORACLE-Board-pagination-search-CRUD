@@ -14,12 +14,13 @@ public interface BoardMapper {
 	
 	/*READ start*/
 	public List<Board> getArticleList(Map<?,?> map) throws Exception;
+	public Board selectArticle(Map<?,?>map) throws Exception;
 	public int count(Map<?,?> map) throws Exception;
 	public int exist(Map<?,?> map) throws Exception;
 	/*READ end*/
 	
 	/*UPDATE start*/
-	
+	public int updateHitCount(Map<?,?> map) throws Exception;
 	/*UPDATE end*/
 	
 	/*DELETE start*/

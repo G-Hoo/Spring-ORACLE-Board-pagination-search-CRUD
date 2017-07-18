@@ -35,7 +35,7 @@
 				<tr>
 					<td><span>${article.seq}</span></td>
 					<td><span>${article.id}</span></td>
-					<td><span><a id="link" href="#">${article.title}</a></span></td>
+					<td><span><a id="link" href="${context}/detail/${article.seq}">${article.title}</a></span></td>
 					<td><span>${article.regdate}</span></td>
 					<td><span>${article.hit_cnt}</span></td>
 				</tr>

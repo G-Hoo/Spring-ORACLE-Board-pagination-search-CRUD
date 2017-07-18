@@ -14,8 +14,29 @@
    SELECT t2.* FROM (SELECT ROWNUM art_seq, t.* FROM (SELECT * FROM Board ORDER BY seq DESC) t) t2 WHERE t2.art_seq BETWEEN #{startRow} AND #{endRow}
    </select>
    
-   <!-- UPDATE -->
+   <select id="selectArticle" parameterType="hashmap" resultType="com.board.web.domain.Board">
+	SELECT
+		seq,
+		id,
+		title,
+		content,
+		regdate,
+		hit_cnt
+	FROM
+		Board
+	WHERE
+		seq = #{seq}		
+	</select>
    
+   <!-- UPDATE -->
+   <update id="updateHitCount" parameterType="hashmap">
+	UPDATE Board 
+	SET
+		hit_cnt = NVL(hit_cnt, 0) + 1
+	WHERE
+		seq = #{seq}	
+	</update>
+	
    <!-- DELETE -->
    
    <!-- COUNT -->

@@ -156,3 +156,52 @@ textarea{
 }
 
 /* boardwrite jsp end */
+
+/* boarddetail jsp start */
+
+.boarddetail-wrapper{
+	width:100%;
+	margin-top:60px;
+}
+
+.boarddetail-subwrapper{
+	width:1200px;
+	margin:0 auto;
+	text-align:center;
+}
+
+.boarddetail-btnarea{
+	margin:20px auto 0;
+	width:1200px;
+}
+
+#boarddetail-homebtn{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+#boarddetail-updatebtn{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+
+#boarddetail-deletebtn{
+	border: none;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: skyblue;
+    color: white;
+    font-size: 14px;
+    cursor:pointer;
+}
+/* boarddetail jsp end */

@@ -78,6 +78,22 @@ public class BoardController {
 		return "board:write";
 	}
 	
+	@RequestMapping(value="/detail/{seq}")
+	public String goDetailPage(@PathVariable String seq,Model model) throws Exception{
+		logger.info("BoardController - goDetailPage() {}", "ENTERED");
+		System.out.println("넘어온 seq : " + seq);
+		Map<String, Object> map = new HashMap<>();
+		map.put("seq", seq);
+		int check = boardService.updateHitCount(map);
+		System.out.println("mapper 거쳐온 조회수 : " + check);
+		board = boardService.selectArticle(map);
+		model.addAttribute("seq", seq);
+		model.addAttribute("id", board.getId());
+		model.addAttribute("title", board.getTitle());
+		model.addAttribute("content", board.getContent());
+		return "board:detail";
+	}
+	
 	@RequestMapping(value = "/write",method=RequestMethod.POST)
 	public String write(Model model,@RequestParam("title") String title,@RequestParam("id") String id, @RequestParam("content") String content) throws Exception{
 		logger.info("BoardController - write() {}", "ENTERED");
