@@ -21,6 +21,7 @@ public interface BoardMapper {
 	
 	/*UPDATE start*/
 	public int updateHitCount(Map<?,?> map) throws Exception;
+	public int updateArticle(Map<?,?> map) throws Exception;
 	/*UPDATE end*/
 	
 	/*DELETE start*/

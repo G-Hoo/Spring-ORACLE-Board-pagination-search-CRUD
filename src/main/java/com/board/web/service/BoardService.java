@@ -26,6 +26,13 @@ public class BoardService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public int updateArticle(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - updateArticle (){}", "ENTERED");
+		IPutService service = (map) -> mapper.updateArticle(map);
+		return (int) service.execute((Map<String, Object>) paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Board> getArticleList(Map<?,?> paramMap) throws Exception {
 		logger.info("BoardService - getArticleList (){}", "ENTERED");
 		IGetService service = (map) -> mapper.getArticleList(map);

@@ -12,7 +12,7 @@
   				<textarea name="content" id="content" cols="40" rows="10" placeholder="내용"></textarea>
   			</li>
   			<li class="boardwrite-btnwrapper">
-	  			<input id="boardwrite-write" type="submit" value="글쓰기"/>
+	  			<input id="boardwrite-write" type="button" value="글쓰기"/>
 	  			<a href="${context}"><input id="boardwrite-cancel" type="button" value="취소"/></a>
   			</li>
 		</ul>
@@ -22,16 +22,16 @@
 <script>
 $(function(){
 	   var form = $('#writeForm');
-	   $('form input[type=submit]').on('click',function(){
+	   $('#boardwrite-write').on('click',function(){
+		   alert('글쓰기 버튼 클릭');
 	       var title = $('#title').val();
 	       var content = $('#content').val();
 	       var id = $('#id').val();
 	       if(title=='' || content==''|| id==''){
-		   	alert('필수 항목이 빠져 있습니다.');
+		   alert('필수 항목이 빠져 있습니다.');
 	       } else {
 	    	form.attr('method','post');
 		   	form.attr('action','${context}/write');
-		   	alert('글쓰기 버튼 클릭');
 		   	form.submit();
 	       }
 	   });

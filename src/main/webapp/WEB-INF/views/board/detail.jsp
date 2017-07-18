@@ -4,14 +4,30 @@
 	<div class="boarddetail-subwrapper">
 		<h1>ARTICLE DETAIL</h1>
 		<span>게시글 번호 : ${seq}</span></br>
-		<input type="hidden" name="max" value="${seq}"/>
-		<input type="text" name="writer" placeholder="아이디" value="${id}" readonly=readonly/>
-		<input type="text" name="title" placeholder="제목"  value="${title}"/><br />
-	     	<textarea rows="20" name="comment">${content}</textarea>
-	    <div class="boarddetail-btnarea">
-	    	<a href="${context}/list/1"><input id="boarddetail-homebtn" type="submit" value="홈으로"/></a>
-	    	<input id="boarddetail-updatebtn" type="submit" value="수정"/>
-	    	<input id="boarddetail-deletebtn" type="submit" value="삭제"/>
-	    </div>
+			<form id="updateForm">
+				<input type="hidden" id ="seq" name="seq" value="${seq}"/>
+				<input type="text" id="id" name="id" placeholder="아이디" value="${id}" readonly=readonly/>
+				<input type="text" id="title" name="title" placeholder="제목"  value="${title}"/><br />
+		    	<textarea rows="20" id="content" name="content">${content}</textarea>
+		    </form>
+		    <div class="boarddetail-btnarea">
+		    	<a href="${context}/list/1"><input id="boarddetail-homebtn" type="button" value="홈으로"/></a>
+		    	<input id="boarddetail-updatebtn" type="button" value="수정"/>
+		    	<input id="boarddetail-deletebtn" type="button" value="삭제"/>
+		    </div>
     </div>
 </div>
+<script>
+$(function(){
+	var form = $('#updateForm');
+	$('#boarddetail-updatebtn').on('click',function(){
+		alert('수정 버튼 클릭');
+		form.attr('method','post');
+		form.attr('action','${context}/update');
+		form.submit();
+	});
+	$('#boarddetail-deletebtn').on('click',function(){
+		alert('삭제 버튼 클릭');
+	});
+});
+</script>

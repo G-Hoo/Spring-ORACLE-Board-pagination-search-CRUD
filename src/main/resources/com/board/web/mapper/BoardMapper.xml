@@ -37,6 +37,15 @@
 		seq = #{seq}	
 	</update>
 	
+	<update id="updateArticle" parameterType="hashmap">
+			UPDATE Board 
+			SET
+				title = #{title},
+				content = #{content}
+			WHERE
+				seq = #{seq}	
+	</update>
+	
    <!-- DELETE -->
    
    <!-- COUNT -->
