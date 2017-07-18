@@ -23,11 +23,14 @@ $(function(){
 	$('#boarddetail-updatebtn').on('click',function(){
 		alert('수정 버튼 클릭');
 		form.attr('method','post');
-		form.attr('action','${context}/update');
+		form.attr('action','${context}/updateArticle');
 		form.submit();
 	});
 	$('#boarddetail-deletebtn').on('click',function(){
 		alert('삭제 버튼 클릭');
+		form.attr('method','post');
+		form.attr('action','${context}/deleteArticle');
+		form.submit();
 	});
 });
 </script>

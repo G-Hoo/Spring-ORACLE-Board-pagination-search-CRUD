@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- dataSourceSpied START -->
-   <appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
+    <appender name="console-infolog" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %5p %m%n" />
         </layout>   

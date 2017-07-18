@@ -33,6 +33,13 @@ public class BoardService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public int deleteArticle(Map<?,?> paramMap) throws Exception{
+		logger.info("BoardService - deleteArticle (){}", "ENTERED");
+		IDeleteService service = (map) -> mapper.deleteArticle(map);
+		return (int) service.execute((Map<String, Object>) paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Board> getArticleList(Map<?,?> paramMap) throws Exception {
 		logger.info("BoardService - getArticleList (){}", "ENTERED");
 		IGetService service = (map) -> mapper.getArticleList(map);

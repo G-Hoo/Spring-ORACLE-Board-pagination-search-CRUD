@@ -43,7 +43,7 @@ public class BoardController {
 		int pageNumber = Integer.parseInt(pageNo);
 		int theNumberOfRows = boardService.count(map);
 		System.out.println("theNumberOfRows:    " + theNumberOfRows);
-		int pagesPerOneBlock = 5, 
+		int pagesPerOneBlock = 5,
 			rowsPerOnePage = 5,
 			theNumberOfPages = (theNumberOfRows % rowsPerOnePage == 0) ? theNumberOfRows / rowsPerOnePage
 						: theNumberOfRows / rowsPerOnePage + 1,
@@ -73,7 +73,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/detail/{seq}")
-	public String goDetailPage(@PathVariable String seq,Model model) throws Exception{
+	public String goDetailPage(@PathVariable int seq,Model model) throws Exception{
 		logger.info("BoardController - goDetailPage() {}", "ENTERED");
 		System.out.println("넘어온 seq : " + seq);
 		Map<String, Object> map = new HashMap<>();
@@ -139,8 +139,8 @@ public class BoardController {
 		return "board:list";
 	}
 	
-	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String update(Model model,@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("seq") int seq) throws Exception{
+	@RequestMapping(value="/updateArticle",method=RequestMethod.POST)
+	public String updateArticle(Model model,@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("seq") int seq) throws Exception{
 		logger.info("BoardController - update() {}", "ENTERED");
 		System.out.println("넘어온 데이터 값:    " + title + "," + content + "," + seq);
 		Map<String, Object> map = new HashMap<>();
@@ -149,6 +149,47 @@ public class BoardController {
 		map.put("content",content);
 		int check = boardService.updateArticle(map);
 		System.out.println("mapper 를 거치고온 updateArticle int no : " + check);
+		
+		map.clear();
+		map.put("group", "Board");
+		int pageNumber = 1;
+		int theNumberOfRows = boardService.count(map);
+		System.out.println("theNumberOfRows:    " + theNumberOfRows);
+		int pagesPerOneBlock = 5, 
+			rowsPerOnePage = 5,
+			theNumberOfPages = (theNumberOfRows % rowsPerOnePage == 0) ? theNumberOfRows / rowsPerOnePage
+						: theNumberOfRows / rowsPerOnePage + 1,
+			startPage = pageNumber - ((pageNumber - 1) % pagesPerOneBlock),
+			endPage = ((startPage + rowsPerOnePage - 1) < theNumberOfPages) ? startPage + pagesPerOneBlock - 1
+						: theNumberOfPages,
+			startRow = (pageNumber - 1) * rowsPerOnePage + 1,
+			endRow = pageNumber * rowsPerOnePage,
+			prevBlock = startPage - pagesPerOneBlock,
+			nextBlock = startPage + pagesPerOneBlock;
+		
+		List<Board> list = new ArrayList<>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		list = boardService.getArticleList(map);
+		model.addAttribute("list", list);
+		model.addAttribute("theNumberOfRows", theNumberOfRows);
+		model.addAttribute("nextBlock", nextBlock);
+		model.addAttribute("prevBlock", prevBlock);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("theNumberOfPages", theNumberOfPages);
+		
+		return "board:list";
+	}
+	
+	@RequestMapping(value="/deleteArticle",method=RequestMethod.POST)
+	public String deleteArticle(Model model, @RequestParam("seq")int seq) throws Exception{
+		System.out.println("넘어온 데이터 값 : " + seq);
+		Map<String, Object> map = new HashMap<>();
+		map.put("seq", seq);
+		int check = boardService.deleteArticle(map);
+		System.out.println("mapper 를 거치고온 deleteArticle int no : " + check);
 		
 		map.clear();
 		map.put("group", "Board");

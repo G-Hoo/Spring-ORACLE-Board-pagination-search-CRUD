@@ -25,6 +25,6 @@ public interface BoardMapper {
 	/*UPDATE end*/
 	
 	/*DELETE start*/
-	
+	public int deleteArticle(Map<?,?> map) throws Exception;
 	/*DELETE end*/
 }
