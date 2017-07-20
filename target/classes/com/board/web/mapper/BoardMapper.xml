@@ -15,6 +15,10 @@
    SELECT t2.* FROM (SELECT ROWNUM art_seq, t.* FROM (SELECT * FROM Board ORDER BY seq DESC) t) t2 WHERE t2.art_seq BETWEEN #{startRow} AND #{endRow}
    </select>
    
+   <select id="searchByTitle" resultType="com.board.web.domain.Board" parameterType="hashMap">
+   SELECT * FROM Board WHERE title LIKE #{title} ORDER BY seq DESC
+   </select>
+   
    <select id="selectArticle" parameterType="hashmap" resultType="com.board.web.domain.Board">
 	SELECT
 		seq,
@@ -40,12 +44,12 @@
    </update>
 	
    <update id="updateArticle" parameterType="hashmap">
-			UPDATE Board 
-			SET
-				title = #{title},
-				content = #{content}
-			WHERE
-				seq = #{seq}	
+	UPDATE Board 
+	SET
+		title = #{title},
+		content = #{content}
+	WHERE
+		seq = #{seq}	
    </update>
    <!-- UPDATE -->
 	
@@ -59,6 +63,10 @@
    <!-- COUNT -->
    <select id="count" resultType="int" parameterType="hashMap">
    SELECT COUNT(*) FROM ${group}
+   </select>
+   
+   <select id="searchCountByTitle" resultType="int" parameterType="hashMap">
+   SELECT COUNT(*) FROM ${group} WHERE title LIKE #{title}
    </select>
    <!-- COUNT -->
    

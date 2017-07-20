@@ -3,7 +3,7 @@
 <div class="boardlist-wrapper">
 	<div class="boardlist-subwrapper">
 	<!-- 검색 부분 시작-->
-		<form action="${context}/search">
+		<form id="search">
 			<div class="boardlist-search-wrapper">
 			<select class="boardlist-search-selectbox" name="selectVal">
 				<option value="all">전체</option>
@@ -11,9 +11,8 @@
 				<option value="title">제목</option>
 			</select>
 			<div class="boardlist-searchbtn-wrapper">
-				<input id="searchtext" type="text" name="searchtext" placeholder="게시물 검색">
-				<button class="boardlist-searchbtn" type="submit">검색</button>
-				<input type="hidden" name="action" value="search"/>
+				<input id="searchtext" type="text" name="searchText" placeholder="게시물 검색">
+				<button id="searchbtn" class="boardlist-searchbtn">검색</button>
 			</div>
 			</div>
 		</form>
@@ -44,7 +43,7 @@
 	<!-- 게시판 리스트 부분 끝 -->	
 	
 	<!-- 페이지네이션 부분 시작-->
-		<form id="pagination">
+
 			<ul class="pagination" id="pagination" class="pagination">
 			    <c:if test="${prevBlock gt 0}">
 				    <li id="previous">
@@ -73,7 +72,7 @@
 				   	</li>
 				</c:if>
 			</ul>
-		</form>
+
 	<!-- 페이지네이션 부분 끝 -->
 	
 	<!-- 글쓰기,홈으로 버튼 부분 시작 -->
@@ -100,6 +99,14 @@ $(function(){
 		 goPage.attr('method','post');
 		 goPage.attr('action','${context}/list/'+index);
 		 goPage.submit();
+    });
+     
+    $('#searchbtn').on('click',function(){
+    	var form = $('#search');
+    	alert('검색버튼 클릭');
+    	form.attr('action','${context}/search/1');
+    	form.attr('method','post');
+    	form.submit();
     });
 });
 </script>

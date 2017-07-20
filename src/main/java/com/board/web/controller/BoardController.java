@@ -22,7 +22,6 @@ import com.board.web.service.BoardService;
 import com.board.web.util.Util;
 
 @Controller
-@SessionAttributes("board")
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -39,7 +38,6 @@ public class BoardController {
 		logger.info("BoardController - board() {}", "ENTERED");
 		Map<String, Object> map = new HashMap<>();
 		map.put("group", "Board");
-		
 		int pageNumber = Integer.parseInt(pageNo);
 		int theNumberOfRows = boardService.count(map);
 		System.out.println("theNumberOfRows:    " + theNumberOfRows);
@@ -54,7 +52,6 @@ public class BoardController {
 			endRow = pageNumber * rowsPerOnePage,
 			prevBlock = startPage - pagesPerOneBlock,
 			nextBlock = startPage + pagesPerOneBlock;
-		
 		List<Board> list = new ArrayList<>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -67,8 +64,77 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageNumber", pageNumber);
 		model.addAttribute("theNumberOfPages", theNumberOfPages);
-		model.addAttribute("result", "SUCCESS");
-		model.addAttribute("null", null);
+		return "board:list";
+	}
+	
+	@RequestMapping(value="/search/{pageNo}",method=RequestMethod.POST)
+	public String search(Model model,@PathVariable String pageNo,
+			@RequestParam("selectVal") String selectVal,@RequestParam("searchText") String searchText) throws Exception{
+		System.out.println("넘어온 검색정보 : " + selectVal + "," + searchText);
+		Map<String, Object> map = new HashMap<>();
+		if(selectVal.equals("all")){
+			System.out.println("검색정보 if all 문 들어옴: " + selectVal + "," + searchText);
+			map.put("group", "Board");
+			int pageNumber = Integer.parseInt(pageNo);
+			int theNumberOfRows = boardService.count(map);
+			System.out.println("theNumberOfRows:    " + theNumberOfRows);
+			int pagesPerOneBlock = 5,
+				rowsPerOnePage = 5,
+				theNumberOfPages = (theNumberOfRows % rowsPerOnePage == 0) ? theNumberOfRows / rowsPerOnePage
+							: theNumberOfRows / rowsPerOnePage + 1,
+				startPage = pageNumber - ((pageNumber - 1) % pagesPerOneBlock),
+				endPage = ((startPage + rowsPerOnePage - 1) < theNumberOfPages) ? startPage + pagesPerOneBlock - 1
+							: theNumberOfPages,
+				startRow = (pageNumber - 1) * rowsPerOnePage + 1,
+				endRow = pageNumber * rowsPerOnePage,
+				prevBlock = startPage - pagesPerOneBlock,
+				nextBlock = startPage + pagesPerOneBlock;
+			List<Board> list = new ArrayList<>();
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			list = boardService.getArticleList(map);
+			model.addAttribute("list", list);
+			model.addAttribute("theNumberOfRows", theNumberOfRows);
+			model.addAttribute("nextBlock", nextBlock);
+			model.addAttribute("prevBlock", prevBlock);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageNumber", pageNumber);
+			model.addAttribute("theNumberOfPages", theNumberOfPages);
+		}if(selectVal.equals("writer")){
+			System.out.println("검색정보 if writer 문 들어옴: " + selectVal + "," + searchText);
+			/*작성자 아이디로 찾기 구현해야함*/
+		}if(selectVal.equals("title")){
+			System.out.println("검색정보 if title 문 들어옴: " + selectVal + "," + searchText);
+			map.put("group", "Board");
+			map.put("title", searchText);
+			int pageNumber = Integer.parseInt(pageNo);
+			int theNumberOfRows = boardService.searchCountByTitle(map);
+			System.out.println("theNumberOfRows:    " + theNumberOfRows);
+			int pagesPerOneBlock = 5,
+				rowsPerOnePage = 5,
+				theNumberOfPages = (theNumberOfRows % rowsPerOnePage == 0) ? theNumberOfRows / rowsPerOnePage
+							: theNumberOfRows / rowsPerOnePage + 1,
+				startPage = pageNumber - ((pageNumber - 1) % pagesPerOneBlock),
+				endPage = ((startPage + rowsPerOnePage - 1) < theNumberOfPages) ? startPage + pagesPerOneBlock - 1
+							: theNumberOfPages,
+				startRow = (pageNumber - 1) * rowsPerOnePage + 1,
+				endRow = pageNumber * rowsPerOnePage,
+				prevBlock = startPage - pagesPerOneBlock,
+				nextBlock = startPage + pagesPerOneBlock;
+			List<Board> list = new ArrayList<>();
+			map.clear();
+			map.put("title", searchText);
+			list = boardService.searchByTitle(map);
+			model.addAttribute("list", list);
+			model.addAttribute("theNumberOfRows", theNumberOfRows);
+			model.addAttribute("nextBlock", nextBlock);
+			model.addAttribute("prevBlock", prevBlock);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageNumber", pageNumber);
+			model.addAttribute("theNumberOfPages", theNumberOfPages);
+		}
 		return "board:list";
 	}
 	
@@ -105,7 +171,6 @@ public class BoardController {
 		map.put("regdate", Util.nowDate());
 		map.put("hit_cnt", 0);
 		boardService.insertArticle(map);
-		
 		map.clear();
 		map.put("group", "Board");
 		int pageNumber = 1;
@@ -122,7 +187,6 @@ public class BoardController {
 			endRow = pageNumber * rowsPerOnePage,
 			prevBlock = startPage - pagesPerOneBlock,
 			nextBlock = startPage + pagesPerOneBlock;
-		
 		List<Board> list = new ArrayList<>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -135,7 +199,6 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageNumber", pageNumber);
 		model.addAttribute("theNumberOfPages", theNumberOfPages);
-		
 		return "board:list";
 	}
 	
@@ -149,7 +212,6 @@ public class BoardController {
 		map.put("content",content);
 		int check = boardService.updateArticle(map);
 		System.out.println("mapper 를 거치고온 updateArticle int no : " + check);
-		
 		map.clear();
 		map.put("group", "Board");
 		int pageNumber = 1;
@@ -166,7 +228,6 @@ public class BoardController {
 			endRow = pageNumber * rowsPerOnePage,
 			prevBlock = startPage - pagesPerOneBlock,
 			nextBlock = startPage + pagesPerOneBlock;
-		
 		List<Board> list = new ArrayList<>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -179,7 +240,6 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageNumber", pageNumber);
 		model.addAttribute("theNumberOfPages", theNumberOfPages);
-		
 		return "board:list";
 	}
 	
@@ -190,7 +250,6 @@ public class BoardController {
 		map.put("seq", seq);
 		int check = boardService.deleteArticle(map);
 		System.out.println("mapper 를 거치고온 deleteArticle int no : " + check);
-		
 		map.clear();
 		map.put("group", "Board");
 		int pageNumber = 1;
@@ -207,7 +266,6 @@ public class BoardController {
 			endRow = pageNumber * rowsPerOnePage,
 			prevBlock = startPage - pagesPerOneBlock,
 			nextBlock = startPage + pagesPerOneBlock;
-		
 		List<Board> list = new ArrayList<>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -220,7 +278,6 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("pageNumber", pageNumber);
 		model.addAttribute("theNumberOfPages", theNumberOfPages);
-		
 		return "board:list";
 	}
 }
