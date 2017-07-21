@@ -46,7 +46,7 @@
 			<ul class="pagination" id="pagination" class="pagination">
 			    <c:if test="${prevBlock gt 0}">
 				    <li id="previous">
-					    <a href="${context}/search/${nextBlock}?selectVal=${selectVal}&searchText=${searchText}" aria-label="Previous">
+					    <a href="${context}/search/${prevBlock}?selectVal=${selectVal}&searchText=${searchText}" aria-label="Previous">
 					    	<span aria-hidden="true">&laquo;</span>
 					    </a>
 					</li>
