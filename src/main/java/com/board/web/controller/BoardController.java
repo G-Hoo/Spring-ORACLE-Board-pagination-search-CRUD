@@ -67,10 +67,12 @@ public class BoardController {
 		return "board:list";
 	}
 	
-	@RequestMapping(value="/search/{pageNo}",method=RequestMethod.POST)
+	@RequestMapping(value="/search/{pageNo}")
 	public String search(Model model,@PathVariable String pageNo,
 			@RequestParam("selectVal") String selectVal,@RequestParam("searchText") String searchText) throws Exception{
 		System.out.println("넘어온 검색정보 : " + selectVal + "," + searchText);
+		model.addAttribute("selectVal", selectVal);
+		model.addAttribute("searchText", searchText);
 		Map<String, Object> map = new HashMap<>();
 		if(selectVal.equals("all")){
 			System.out.println("검색정보 if all 문 들어옴: " + selectVal + "," + searchText);
@@ -125,6 +127,8 @@ public class BoardController {
 			List<Board> list = new ArrayList<>();
 			map.clear();
 			map.put("title", searchText);
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
 			list = boardService.searchByTitle(map);
 			model.addAttribute("list", list);
 			model.addAttribute("theNumberOfRows", theNumberOfRows);
@@ -135,7 +139,7 @@ public class BoardController {
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("theNumberOfPages", theNumberOfPages);
 		}
-		return "board:list";
+		return "board:searchlist";
 	}
 	
 	@RequestMapping(value="/detail/{seq}")

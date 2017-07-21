@@ -43,36 +43,33 @@
 	<!-- 게시판 리스트 부분 끝 -->	
 	
 	<!-- 페이지네이션 부분 시작-->
-
 			<ul class="pagination" id="pagination" class="pagination">
 			    <c:if test="${prevBlock gt 0}">
 				    <li id="previous">
-					    <a href="${context}/list/${prevBlock}" aria-label="Previous">
+					    <a href="${context}/search/${nextBlock}?selectVal=${selectVal}&searchText=${searchText}" aria-label="Previous">
 					    	<span aria-hidden="true">&laquo;</span>
 					    </a>
 					</li>
 				</c:if>
 				
 			    <c:forEach varStatus="i" begin="${startPage}" end="${endPage}" step="1">
-			    	<c:choose>
+					<c:choose>
 						<c:when test="${i.index eq pageNo}">
 							<li><a href="#">${i.index}</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a class="goPage" href="${context}/list/${i.index}">${i.index}</a></li>
+							<li><a id="searchListGoPage" href="${context}/search/${i.index}?selectVal=${selectVal}&searchText=${searchText}">${i.index}</a></li>
 						</c:otherwise>
-						</c:choose>
+					</c:choose>
 			    </c:forEach>
-			    
 			    <c:if test="${nextBlock le theNumberOfPages}">
 					<li id="next">
-					    <a href="${context}/list/${nextBlock}" aria-label="Next">
+					    <a href="${context}/search/${nextBlock}?selectVal=${selectVal}&searchText=${searchText}" aria-label="Next">
 					    	<span aria-hidden="true">&raquo;</span>
 					    </a>
 				   	</li>
 				</c:if>
 			</ul>
-
 	<!-- 페이지네이션 부분 끝 -->
 	
 	<!-- 글쓰기,홈으로 버튼 부분 시작 -->
@@ -92,17 +89,10 @@
 </div>
 <script>
 $(function(){
-     $('.goPage').on('click',function(){
-		 var goPage = $(this);
-		 var index = $(this).attr('href').split('/')[3];
-		 alert(index);
-    });
-     
     $('#searchbtn').on('click',function(){
     	var form = $('#search');
     	alert('검색버튼 클릭');
     	form.attr('action','${context}/search/1');
-    	form.attr('method','post');
     	form.submit();
     });
 });
