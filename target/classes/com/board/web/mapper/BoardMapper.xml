@@ -19,6 +19,10 @@
    SELECT t2.* FROM (SELECT ROWNUM art_seq, t.* FROM (SELECT * FROM Board WHERE title LIKE #{title} ORDER BY seq DESC) t) t2 WHERE t2.art_seq BETWEEN #{startRow} AND #{endRow}
    </select>
    
+   <select id="searchByWriter" resultType="com.board.web.domain.Board" parameterType="hashMap">
+   SELECT t2.* FROM (SELECT ROWNUM art_seq, t.* FROM (SELECT * FROM Board WHERE id LIKE #{writer} ORDER BY seq DESC) t) t2 WHERE t2.art_seq BETWEEN #{startRow} AND #{endRow}
+   </select>
+   
    <select id="selectArticle" parameterType="hashmap" resultType="com.board.web.domain.Board">
 	SELECT
 		seq,
@@ -67,6 +71,10 @@
    
    <select id="searchCountByTitle" resultType="int" parameterType="hashMap">
    SELECT COUNT(*) FROM ${group} WHERE title LIKE #{title}
+   </select>
+   
+   <select id="searchCountByWriter" resultType="int" parameterType="hashMap">
+   SELECT COUNT(*) FROM ${group} WHERE id LIKE #{writer}
    </select>
    <!-- COUNT -->
    

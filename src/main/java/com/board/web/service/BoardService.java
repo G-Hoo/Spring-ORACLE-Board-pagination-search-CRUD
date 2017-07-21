@@ -62,8 +62,15 @@ public class BoardService {
 	
 	@SuppressWarnings("unchecked")
 	public int searchCountByTitle(Map<?,?> paramMap) throws Exception {
-		logger.info("BoardService - count (){}", "ENTERED");
+		logger.info("BoardService - searchCountByTitle (){}", "ENTERED");
 		IGetService service = (map) -> mapper.searchCountByTitle(map);
+		return (int) service.execute((Map<String, Object>) paramMap);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int searchCountByWriter(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - searchCountByWriter (){}", "ENTERED");
+		IGetService service = (map) -> mapper.searchCountByWriter(map);
 		return (int) service.execute((Map<String, Object>) paramMap);
 	}
 	
@@ -76,9 +83,15 @@ public class BoardService {
 	
 	@SuppressWarnings("unchecked")
 	public List<Board> searchByTitle(Map<?,?> paramMap) throws Exception {
-		logger.info("BoardService - updateHitCount (){}", "ENTERED");
+		logger.info("BoardService - searchByTitle (){}", "ENTERED");
 		IGetService service = (map) -> mapper.searchByTitle(map);
 		return (List<Board>) service.execute((Map<String, Object>) paramMap);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Board> searchByWriter(Map<?,?> paramMap) throws Exception {
+		logger.info("BoardService - searchByWriter (){}", "ENTERED");
+		IGetService service = (map) -> mapper.searchByWriter(map);
+		return (List<Board>) service.execute((Map<String, Object>) paramMap);
+	}
 }

@@ -105,7 +105,36 @@ public class BoardController {
 			model.addAttribute("theNumberOfPages", theNumberOfPages);
 		}if(selectVal.equals("writer")){
 			System.out.println("검색정보 if writer 문 들어옴: " + selectVal + "," + searchText);
-			/*작성자 아이디로 찾기 구현해야함*/
+			map.put("group", "Board");
+			map.put("writer", searchText);
+			int pageNumber = Integer.parseInt(pageNo);
+			int theNumberOfRows = boardService.searchCountByWriter(map);
+			System.out.println("theNumberOfRows:    " + theNumberOfRows);
+			int pagesPerOneBlock = 5,
+				rowsPerOnePage = 5,
+				theNumberOfPages = (theNumberOfRows % rowsPerOnePage == 0) ? theNumberOfRows / rowsPerOnePage
+							: theNumberOfRows / rowsPerOnePage + 1,
+				startPage = pageNumber - ((pageNumber - 1) % pagesPerOneBlock),
+				endPage = ((startPage + rowsPerOnePage - 1) < theNumberOfPages) ? startPage + pagesPerOneBlock - 1
+							: theNumberOfPages,
+				startRow = (pageNumber - 1) * rowsPerOnePage + 1,
+				endRow = pageNumber * rowsPerOnePage,
+				prevBlock = startPage - pagesPerOneBlock,
+				nextBlock = startPage + pagesPerOneBlock;
+				List<Board> list = new ArrayList<>();
+				map.clear();
+				map.put("writer", searchText);
+				map.put("startRow", startRow);
+				map.put("endRow", endRow);
+				list = boardService.searchByWriter(map);
+				model.addAttribute("list", list);
+				model.addAttribute("theNumberOfRows", theNumberOfRows);
+				model.addAttribute("nextBlock", nextBlock);
+				model.addAttribute("prevBlock", prevBlock);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				model.addAttribute("pageNumber", pageNumber);
+				model.addAttribute("theNumberOfPages", theNumberOfPages);
 		}if(selectVal.equals("title")){
 			System.out.println("검색정보 if title 문 들어옴: " + selectVal + "," + searchText);
 			map.put("group", "Board");

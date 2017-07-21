@@ -16,8 +16,10 @@ public interface BoardMapper {
 	public List<Board> getArticleList(Map<?,?> map) throws Exception;
 	public Board selectArticle(Map<?,?> map) throws Exception;
 	public List<Board> searchByTitle(Map<?,?> map) throws Exception;
+	public List<Board> searchByWriter(Map<?,?> map) throws Exception;
 	public int count(Map<?,?> map) throws Exception;
 	public int searchCountByTitle(Map<?,?> map) throws Exception;
+	public int searchCountByWriter(Map<?,?> map) throws Exception;
 	public int exist(Map<?,?> map) throws Exception;
 	/*READ end*/
 	
